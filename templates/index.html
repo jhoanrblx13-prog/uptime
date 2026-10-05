@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>uptime</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <canvas id="field"></canvas>
+  <div class="wrap">
+    <h1>uptime</h1>
+    <p>One URL per line. It requests each one and marks up or down.</p>
+    <div class="grid">
+      <form class="panel" method="post" action="/check">
+        <label for="urls">URLs</label>
+        <textarea id="urls" name="urls" required>{{ draft }}</textarea>
+        <button type="submit">Check</button>
+      </form>
+      <section class="panel">
+        <label>Result</label>
+        {% if rows is not none %}
+        <table>
+          <thead><tr><th>URL</th><th>Status</th><th></th></tr></thead>
+          <tbody>
+            {% for row in rows %}
+            <tr>
+              <td>{{ row.url }}</td>
+              <td class="{{ 'ok' if row.ok else 'bad' }}">{{ row.status }}</td>
+              <td>{{ row.detail }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <p class="muted">Try your three demos, one per line.</p>
+        {% endif %}
+      </section>
+    </div>
+  </div>
+  <script src="/static/field.js"></script>
+</body>
+</html>
