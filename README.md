@@ -2,6 +2,8 @@
 
 Paste URLs, one per line. The page requests each one and shows the status code, or the error if the request failed.
 
+Demo: https://uptime-dqbh.onrender.com
+
 ## Run
 
 ```bash
